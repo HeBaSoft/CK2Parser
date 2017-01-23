@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CK2Parser", "CK2Parser\CK2Parser.csproj", "{95C76BF6-752F-4254-824D-BDD6FB5B8477}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{4BE6FF4E-60D7-4732-BB79-B05B0C0FEE4E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{95C76BF6-752F-4254-824D-BDD6FB5B8477} = {95C76BF6-752F-4254-824D-BDD6FB5B8477}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{95C76BF6-752F-4254-824D-BDD6FB5B8477}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95C76BF6-752F-4254-824D-BDD6FB5B8477}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95C76BF6-752F-4254-824D-BDD6FB5B8477}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95C76BF6-752F-4254-824D-BDD6FB5B8477}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BE6FF4E-60D7-4732-BB79-B05B0C0FEE4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BE6FF4E-60D7-4732-BB79-B05B0C0FEE4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BE6FF4E-60D7-4732-BB79-B05B0C0FEE4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BE6FF4E-60D7-4732-BB79-B05B0C0FEE4E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
