@@ -1,4 +1,5 @@
 ﻿using CK2Parser.IO;
+using CK2Parser.Node;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,9 +11,9 @@ namespace CK2Parser.Parse {
 
     internal interface IParser {
 
-        KeyValuePair<string, object> Read(CachedLineReader reader);
+        ValueHolder Read(CachedLineReader reader);
 
-        string Write(KeyValuePair<string, object> source);
+        string Write(ValueHolder source);
 
     }
 

@@ -13,7 +13,7 @@ namespace CK2Parser.Parse.Model {
 
         private static readonly Regex _parser = new Regex(@"(\w+)=(?:\n.*|){");
 
-        public KeyValuePair<string, object> Read(CachedLineReader reader) {
+        public ValueHolder Read(CachedLineReader reader) {
             StringBuilder builder = new StringBuilder(
                 reader.ReadLine()
             );
@@ -22,7 +22,7 @@ namespace CK2Parser.Parse.Model {
                 builder.Append(reader.ReadLine());
 
                 if(!_parser.IsMatch(builder.ToString()))
-                    return default(KeyValuePair<string, object>);
+                    return null;
             }
 
             string key = _parser.Match(builder.ToString()).Groups[1].ToString();
@@ -40,13 +40,12 @@ namespace CK2Parser.Parse.Model {
                     builder.Append(line);
             }
 
-            return new KeyValuePair<string, object> (
-                key,
-                new NodeResolver(builder.ToString()).Resolve() // TODO: Make this resolve during retrieving value
+            return new ValueHolder(
+                this, key, builder.ToString(), false
             );
         }
 
-        public string Write(KeyValuePair<string, object> source) {
+        public string Write(ValueHolder source) {
             throw new NotImplementedException();
         }
 

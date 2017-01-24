@@ -13,10 +13,10 @@ namespace CK2Parser.Parse.Model {
 
         private static readonly Regex _parser = new Regex(@"^\s*{\n", RegexOptions.Multiline);
 
-        public KeyValuePair<string, object> Read(CachedLineReader reader) {
+        public ValueHolder Read(CachedLineReader reader) {
 
             if(!_parser.IsMatch(reader.ReadLine()))
-                return default(KeyValuePair<string, object>);
+                return null;
 
             StringBuilder builder = new StringBuilder();
 
@@ -31,13 +31,12 @@ namespace CK2Parser.Parse.Model {
                     builder.Append(line);
             }
 
-            return new KeyValuePair<string, object>(
-                "wrapper",
-                new NodeResolver(builder.ToString()).Resolve() // TODO: Make this resolve during retrieving value
+            return new ValueHolder(
+                this, "wrapper", builder.ToString(), false
             );
         }
 
-        public string Write(KeyValuePair<string, object> source) {
+        public string Write(ValueHolder source) {
             throw new NotImplementedException();
         }
 

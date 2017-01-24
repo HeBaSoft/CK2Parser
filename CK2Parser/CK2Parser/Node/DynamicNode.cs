@@ -15,21 +15,21 @@ namespace CK2Parser.Node {
 
         public ulong Count { private set; get; }
 
-        internal void Add(KeyValuePair<string, object> pair) {
+        internal void Add(ValueHolder holder) {
             // Store multiple Models in List if they have same key
-            if(_storage.ContainsKey(pair.Key)) {
-                var entry = _storage[pair.Key];
+            if(_storage.ContainsKey(holder.Key)) {
+                var entry = _storage[holder.Key];
 
-                if(entry is List<object>)
-                    (entry as List<object>).Add(pair.Value);
+                if(entry is List<ValueHolder>)
+                    (entry as List<ValueHolder>).Add(holder);
                 else
-                    _storage[pair.Key] = new List<object>() {
-                        entry,
-                        pair.Value
+                    _storage[holder.Key] = new List<ValueHolder>() {
+                        entry as ValueHolder,
+                        holder
                     };
             } else {
                 // Store single Model
-                _storage.Add(pair.Key, pair.Value);
+                _storage.Add(holder.Key, holder);
             }
 
             Count++;
@@ -37,7 +37,10 @@ namespace CK2Parser.Node {
 
         public object Get(string key) {
             object entry = _storage[key];
-            return entry is List<object> ? (entry as List<object>).ToArray() : entry;
+
+            return entry is List<ValueHolder> ? 
+                (entry as List<ValueHolder>).Select(e => e.Value).ToArray() : 
+                (entry as ValueHolder).Value;
         }
 
         // DynamicObject

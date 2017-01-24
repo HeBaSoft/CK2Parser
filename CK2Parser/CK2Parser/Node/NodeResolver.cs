@@ -31,27 +31,27 @@ namespace CK2Parser.Node {
 
         public DynamicNode Resolve() {
             while(_reader.HasNext) {
-                var pair = ResolveNextModel();
+                ValueHolder holder = ResolveNext();
 
-                if(pair.Equals(default(KeyValuePair<string, object>)))
-                    break;
+                if(holder == null)
+                    break; // hack
 
-                _node.Add(pair);
+                _node.Add(holder);
             }
 
             _reader.Dispose();
             return _node;
         }
 
-        private KeyValuePair<string, object> ResolveNextModel() {
+        private ValueHolder ResolveNext() {
             int startLine = _reader.CurrentLine;
 
             foreach(IParser parser in Parsers) {
 
-                KeyValuePair<string, object> result = parser.Read(_reader);
+                ValueHolder result = parser.Read(_reader);
 
                 // If Parser fails, go back and try next one
-                if(result.Equals(default(KeyValuePair<string, object>))) {
+                if(result == null) {
                     _reader.ReturnToLine(startLine);
 
                 } else {
@@ -64,7 +64,7 @@ namespace CK2Parser.Node {
             if(!_reader.ReadLine().Equals("}\n")) { // Hack for end of file
                 throw new Exception("Failed to resolve model, no compatible parser found");
             } else {
-                return default(KeyValuePair<string, object>);
+                return null;
             }
         }
 

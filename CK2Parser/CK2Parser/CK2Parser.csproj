@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="IO\CK2File.cs" />
     <Compile Include="IO\CachedLineReader.cs" />
+    <Compile Include="Node\ValueHolder.cs" />
     <Compile Include="Node\NodeResolver.cs" />
     <Compile Include="Parse\Model\ArrayParser.cs" />
     <Compile Include="Parse\IParser.cs" />
@@ -55,7 +56,6 @@
     <Compile Include="Parse\Model\PrimitiveParser.cs" />
     <Compile Include="Node\DynamicNode.cs" />
     <Compile Include="Parse\Model\WrapperParser.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
