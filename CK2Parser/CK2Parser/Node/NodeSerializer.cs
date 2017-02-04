@@ -21,11 +21,12 @@ namespace CK2Parser.Node {
         public string Serialize() {
             foreach(KeyValuePair<string, object> pair in _node) {
 
-                if(pair.Value is IList) {
-                    continue; // SKIP FOR NOW
+                if(pair.Value is IList && !pair.Value.GetType().IsArray) {
+                    foreach(object entry in pair.Value as IList)
+                        SerializePair(new KeyValuePair<string, object>(pair.Key, entry));
+                } else {
+                    SerializePair(pair);
                 }
-
-                SerializePair(pair);
 
             }
 

@@ -19,7 +19,7 @@ namespace Tests {
             //ReadWrapped();
             //ReadMultipleKeys();
             //ReadArray();
-            //RewriteMain();
+            RewriteMain();
 
             Console.WriteLine("Done!");
             Console.ReadKey();

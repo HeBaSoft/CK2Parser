@@ -41,8 +41,17 @@ namespace CK2Parser.Parse.Model {
         }
 
         public bool Serialize(KeyValuePair<string, object> source, StringBuilder builder, int nestLevel) {
-            //throw new NotImplementedException();
-            return false;
+            if(!source.Value.GetType().IsArray)
+                return false;
+
+            string padding = new string('\t', nestLevel);
+
+            builder.Append(padding);
+            builder.Append(source.Key);
+            builder.Append("={");
+            builder.Append(string.Join(" ", source.Value as object[]));
+            builder.AppendLine("}");
+            return true;
         }
 
     }
