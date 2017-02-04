@@ -14,7 +14,7 @@ namespace CK2Parser.Parse.Model {
         private static readonly Regex _parserOneline = new Regex(@"(\w+)=(?:{)(.+)}");
         private static readonly Regex _parserUgly    = new Regex(@"(\w+)=(?:\s+{)(\s.+)}");
 
-        public ValueHolder Read(CachedLineReader reader) {
+        public KeyValuePair<string, object> Deserialize(CachedLineReader reader, int nestLevel) {
             StringBuilder builder = new StringBuilder(
                 reader.ReadLine()
             );
@@ -29,18 +29,20 @@ namespace CK2Parser.Parse.Model {
                 builder.Append(reader.ReadLine());
 
                 if(!_parserUgly.IsMatch(builder.ToString()))
-                    return null;
+                    return default(KeyValuePair<string, object>);
 
                 match = _parserUgly.Match(builder.ToString());
             }
 
-            return new ValueHolder(
-                this, match.Groups[1].ToString(), match.Groups[2].ToString().Split(' ')
+            return new KeyValuePair<string, object>(
+                match.Groups[1].ToString(),
+                match.Groups[2].ToString().Split(' ')
             );
         }
 
-        public string Write(ValueHolder source) {
-            throw new NotImplementedException();
+        public bool Serialize(KeyValuePair<string, object> source, StringBuilder builder, int nestLevel) {
+            //throw new NotImplementedException();
+            return false;
         }
 
     }

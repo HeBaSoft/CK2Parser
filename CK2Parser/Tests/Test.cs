@@ -13,10 +13,25 @@ namespace Tests {
 
         static void Main(string[] args) {
 
-            dynamic data = new CK2File(
-                Path.Combine(Assembly.GetExecutingAssembly().Location, "..", "..", "..", "..", "Resources", "835_07_26.ck2")
-            ).Read();
+            CK2File file = new CK2File(
+                Path.Combine(Assembly.GetExecutingAssembly().Location, "../../../..", "Resources", "nested.ck2")
+            );
 
+            dynamic data = file.Read();
+
+            Console.WriteLine(
+                data.flags.irminsul
+            );
+
+            data.flags.irminsul = "tut";
+
+            Console.WriteLine(
+                data.flags.irminsul
+            );
+
+            file.Write(data);
+
+            /*
             Console.WriteLine(
                 data.version
             );
@@ -36,6 +51,7 @@ namespace Tests {
             Console.WriteLine(
                 data.disease.disease_small_pox.active
             );
+            */
 
             Console.ReadKey();
 

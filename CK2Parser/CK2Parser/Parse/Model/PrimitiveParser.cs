@@ -15,28 +15,42 @@ namespace CK2Parser.Parse.Model {
 
         private static readonly Regex _parser = new Regex(@"(\w+)=([^{\n]+)");
 
-        public ValueHolder Read(CachedLineReader reader) {
+        public KeyValuePair<string, object> Deserialize(CachedLineReader reader, int nestLevel) {
             string raw = reader.ReadLine();
 
             if(!_parser.IsMatch(raw))
-                return null;
+                return default(KeyValuePair<string, object>);
 
             Match match = _parser.Match(raw);
             object value = match.Groups[2].ToString();
 
             if(value.Equals("yes") || value.Equals("no")) {
                 value = value.Equals("yes");
-            } else {
-                value = (value as string).Replace("\"", string.Empty);
             }
 
-            return new ValueHolder(
-                this, match.Groups[1].ToString(), value
+            return new KeyValuePair<string, object>(
+                match.Groups[1].ToString(),
+                value
             );
         }
 
-        public string Write(ValueHolder source) {
-            throw new NotImplementedException();
+        public bool Serialize(KeyValuePair<string, object> source, StringBuilder builder, int nestLevel) {
+            object value = source.Value;
+
+            if(source.Key != WrapperParser.Key && (value.GetType().IsPrimitive || value is string)) {
+
+                if(value is bool) {
+                    value = Convert.ToBoolean(value) ? "yes" : "no";
+                }
+
+                builder.Append(new string('\t', nestLevel));
+                builder.Append(source.Key);
+                builder.Append("=");
+                builder.AppendLine(value.ToString());
+                return true;
+            }
+
+            return false;
         }
 
     }

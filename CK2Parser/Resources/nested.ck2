@@ -1,0 +1,115 @@
+CK2txt
+	version="2.6.2.0"
+	date="835.7.26"
+	player=
+	{
+		{
+			id=510194
+			type=66
+		}
+	}
+	player_realm="k_moravia"
+	is_zeus_save=yes
+	game_rules=
+	{
+		diplo_assassination="on"
+		demesne_size="unlimited"
+		vassal_limit="unlimited"
+	}
+	game_speed=4
+	mapmode=2
+	flags=
+	{
+		game_start_charlemagne=1066.9.15
+		roland_spawned=771.4.23
+		ogier_spawned=774.4.23
+		avar_khaganate_renamed=780.4.14
+		saxon_wars=785.10.2
+		viking_age_started=793.1.24
+		varangian_guard_founded=793.1.25
+		charlemagne_spain_intervention=802.8.23
+		widukind_spawned=813.7.14
+		irminsul=834.1.3
+	}
+	dynasties=
+	{
+		10290905=
+		{
+			name="d'Asturias"
+			culture="visigothic"
+			religion="catholic"
+			coat_of_arms=
+			{
+				data=
+				{
+4 0 0 36 14 5 5 0 0 36 14 5 5 0 0 36 14 5 5 				}
+				religion="catholic"
+			}
+		}
+		10290906=
+		{
+			name="Ansúrez"
+			culture="visigothic"
+			religion="sunni"
+			coat_of_arms=
+			{
+				data=
+				{
+0 1 0 27 9 5 10 				}
+				religion="sunni"
+			}
+		}
+		10290907=
+		{
+			name="de Castella"
+			culture="visigothic"
+			religion="sunni"
+			coat_of_arms=
+			{
+				data=
+				{
+0 0 0 5 1 6 6 				}
+				religion="sunni"
+			}
+		}
+		10290914=
+		{
+			name="Mehtarid"
+			culture="egyptian_arabic"
+			religion="monophysite"
+			coat_of_arms=
+			{
+				data=
+				{
+4 2 0 4 9 7 6 2 0 4 9 7 6 2 0 4 9 7 6 				}
+				religion="monophysite"
+			}
+		}
+		10290915=
+		{
+			name="of Constantinople"
+			culture="greek"
+			religion="paulician"
+			coat_of_arms=
+			{
+				data=
+				{
+0 4 0 23 5 1 1 				}
+				religion="paulician"
+			}
+		}
+		10290916=
+		{
+			name="of Antioch"
+			culture="greek"
+			religion="monothelite"
+			coat_of_arms=
+			{
+				data=
+				{
+4 2 0 32 13 1 0 2 0 32 13 1 0 2 0 32 13 1 0 				}
+				religion="monothelite"
+			}
+		}
+	}
+}

@@ -11,33 +11,33 @@ namespace CK2Parser.Parse.Model {
 
     class WrapperParser : IParser {
 
+        public static readonly string Key = "wrapper";
+
         private static readonly Regex _parser = new Regex(@"^\s*{\n", RegexOptions.Multiline);
 
-        public ValueHolder Read(CachedLineReader reader) {
-
+        public KeyValuePair<string, object> Deserialize(CachedLineReader reader, int nestLevel) {
             if(!_parser.IsMatch(reader.ReadLine()))
-                return null;
+                return default(KeyValuePair<string, object>);
 
             StringBuilder builder = new StringBuilder();
+            Utils.ResolveNesting(reader, builder);
 
-            // Resolve nesting
-            int nestLevel = 1;
-            while(nestLevel > 0) {
-                string line = reader.ReadLine();
-                nestLevel += line.Count(c => c.Equals('{'));
-                nestLevel -= line.Count(c => c.Equals('}'));
-
-                if(nestLevel > 0)
-                    builder.Append(line);
-            }
-
-            return new ValueHolder(
-                this, "wrapper", builder.ToString(), false
+            return new KeyValuePair<string, object>(
+                Key,
+                new Node.Node(builder.ToString(), nestLevel + 1)
             );
         }
 
-        public string Write(ValueHolder source) {
-            throw new NotImplementedException();
+        public bool Serialize(KeyValuePair<string, object> source, StringBuilder builder, int nestLevel) {
+            if(source.Key != Key)
+                return false;
+
+            string padding = new string('\t', nestLevel);
+
+            builder.Append(padding); builder.AppendLine("{");
+            builder.Append(new NodeSerializer(source.Value as Node.Node).Serialize());
+            builder.Append(padding); builder.AppendLine("}");
+            return true;
         }
 
     }

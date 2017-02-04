@@ -11,9 +11,9 @@ namespace CK2Parser.Parse {
 
     internal interface IParser {
 
-        ValueHolder Read(CachedLineReader reader);
+        KeyValuePair<string, object> Deserialize(CachedLineReader reader, int nestLevel);
 
-        string Write(ValueHolder source);
+        bool Serialize(KeyValuePair<string, object> source, StringBuilder builder, int nestLevel);
 
     }
 

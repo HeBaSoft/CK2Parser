@@ -48,14 +48,15 @@
   <ItemGroup>
     <Compile Include="IO\CK2File.cs" />
     <Compile Include="IO\CachedLineReader.cs" />
-    <Compile Include="Node\ValueHolder.cs" />
-    <Compile Include="Node\NodeResolver.cs" />
+    <Compile Include="Node\NodeSerializer.cs" />
+    <Compile Include="Node\NodeDeserializer.cs" />
     <Compile Include="Parse\Model\ArrayParser.cs" />
     <Compile Include="Parse\IParser.cs" />
-    <Compile Include="Parse\Model\ObjectParser.cs" />
+    <Compile Include="Parse\Model\NodeParser.cs" />
     <Compile Include="Parse\Model\PrimitiveParser.cs" />
-    <Compile Include="Node\DynamicNode.cs" />
+    <Compile Include="Node\Node.cs" />
     <Compile Include="Parse\Model\WrapperParser.cs" />
+    <Compile Include="Parse\Utils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
