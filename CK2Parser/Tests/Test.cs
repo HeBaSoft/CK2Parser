@@ -13,23 +13,13 @@ namespace Tests {
 
         static void Main(string[] args) {
 
-            CK2File file = new CK2File(
-                Path.Combine(Assembly.GetExecutingAssembly().Location, "../../../..", "Resources", "nested.ck2")
-            );
+            string Resources = Path.Combine(Assembly.GetExecutingAssembly().Location, "../../../..", "Resources");
 
-            dynamic data = file.Read();
+            CK2File inFile = new CK2File(Path.Combine(Resources, "nested.ck2"));
 
-            Console.WriteLine(
-                data.flags.irminsul
-            );
+            new CK2File(Path.Combine(Resources, "nested_out.ck2"))
+                .Write(inFile.Read());
 
-            data.flags.irminsul = "tut";
-
-            Console.WriteLine(
-                data.flags.irminsul
-            );
-
-            file.Write(data);
 
             /*
             Console.WriteLine(

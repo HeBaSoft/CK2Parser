@@ -18,7 +18,7 @@ namespace CK2Parser.Parse.Model {
                 reader.ReadLine()
             );
 
-            nestLevel += builder.ToString().Count(ch => ch == '\t');
+            //nestLevel += builder.ToString().Count(ch => ch == '\t');
 
             if(!_parser.IsMatch(builder.ToString())) {
                 builder.Append(reader.ReadLine());
@@ -34,7 +34,7 @@ namespace CK2Parser.Parse.Model {
 
             return new KeyValuePair<string, object>(
                 key,
-                new Node.Node(builder.ToString(), nestLevel)
+                new Node.Node(builder.ToString(), nestLevel + 1)
             );
         }
 

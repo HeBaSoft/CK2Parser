@@ -51,16 +51,9 @@ namespace CK2Parser.IO {
             builder.Append(new NodeSerializer(source).Serialize());
             builder.Append("}");
 
-            var a = builder.ToString();
-
-            /*
-            byte[] buffer = Encoding.UTF8.GetBytes(
-                new NodeSerializer(source).Serialize()
-            );
-            
+            byte[] buffer = Encoding.UTF8.GetBytes(builder.ToString());
             using(FileStream writer = _file.Open(FileMode.Create)) 
                 writer.Write(buffer, 0, buffer.Length);
-            */
         }
 
     }
