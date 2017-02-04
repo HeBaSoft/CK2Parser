@@ -1,0 +1,33 @@
+CK2txt
+	dyn_title=
+	{
+		title="e_dyn_188785"
+		base_title="k_mongolia"
+		is_custom=yes
+		is_dynamic=yes
+	}
+	dyn_title=
+	{
+		title="k_dyn_188785"
+		is_dynamic=yes
+	}
+	dyn_title=
+	{
+		title="e_dyn_74012"
+		base_title="k_khazaria"
+		is_custom=yes
+		is_dynamic=yes
+	}
+	dyn_title=
+	{
+		title="k_dyn_74012"
+		is_dynamic=yes
+	}
+	dyn_title=
+	{
+		title="e_dyn_159132"
+		base_title="d_bulgar"
+		is_custom=yes
+		is_dynamic=yes
+	}
+}

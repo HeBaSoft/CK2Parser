@@ -40,7 +40,7 @@ namespace CK2Parser.IO {
                 throw new Exception("File is not valid .ck2 format");
 
             content = content.Remove(0, FormatKey.Length + 1);
-            content = content.TrimEnd('}');
+            content = content.Remove(content.LastIndexOf('}'), 1);
 
             return new Node.Node(content, 1);
         }

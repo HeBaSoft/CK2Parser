@@ -1,83 +1,26 @@
 CK2txt
-	dynasties=
+	disease_outbreak=
 	{
-		10290905=
+		start_date="816.6.1"
+		outbreak_id=69
+		origins_province=165
+		disease_period=
 		{
-			name="d'Asturias"
-			culture="visigothic"
-			religion="catholic"
-			coat_of_arms=
+			diplo_assassination="on"
+			demesne_size="unlimited"
+			vassal_limit="unlimited"
+		}
+		past_provinces=
+		{
+			claim=
 			{
-				data=
+				title=
 				{
-4 0 0 36 14 5 5 0 0 36 14 5 5 0 0 36 14 5 5 				}
-				religion="catholic"
+					title="d_vastergotland"
+				}
+				weak=yes
 			}
 		}
-		10290906=
-		{
-			name="Ansúrez"
-			culture="visigothic"
-			religion="sunni"
-			coat_of_arms=
-			{
-				data=
-				{
-0 1 0 27 9 5 10 				}
-				religion="sunni"
-			}
-		}
-		10290907=
-		{
-			name="de Castella"
-			culture="visigothic"
-			religion="sunni"
-			coat_of_arms=
-			{
-				data=
-				{
-0 0 0 5 1 6 6 				}
-				religion="sunni"
-			}
-		}
-		10290914=
-		{
-			name="Mehtarid"
-			culture="egyptian_arabic"
-			religion="monophysite"
-			coat_of_arms=
-			{
-				data=
-				{
-4 2 0 4 9 7 6 2 0 4 9 7 6 2 0 4 9 7 6 				}
-				religion="monophysite"
-			}
-		}
-		10290915=
-		{
-			name="of Constantinople"
-			culture="greek"
-			religion="paulician"
-			coat_of_arms=
-			{
-				data=
-				{
-0 4 0 23 5 1 1 				}
-				religion="paulician"
-			}
-		}
-		10290916=
-		{
-			name="of Antioch"
-			culture="greek"
-			religion="monothelite"
-			coat_of_arms=
-			{
-				data=
-				{
-4 2 0 32 13 1 0 2 0 32 13 1 0 2 0 32 13 1 0 				}
-				religion="monothelite"
-			}
-		}
+		active=no
 	}
 }
