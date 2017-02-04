@@ -36,7 +36,7 @@ namespace CK2Parser.Parse.Model {
 
             return new KeyValuePair<string, object>(
                 match.Groups[1].ToString(),
-                match.Groups[2].ToString().Split(' ')
+                match.Groups[2].ToString().Trim().Split(' ')
             );
         }
 

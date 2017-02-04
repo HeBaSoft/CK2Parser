@@ -18,6 +18,7 @@ namespace Tests {
             //ReadNested();
             //ReadWrapped();
             //ReadMultipleKeys();
+            //ReadArray();
             //RewriteMain();
 
             Console.WriteLine("Done!");
@@ -59,6 +60,16 @@ namespace Tests {
             Console.WriteLine(data.dyn_title[0].base_title);
             Console.WriteLine(data.dyn_title[2].title);
             Console.WriteLine(data.dyn_title[3].is_dynamic);
+        }
+
+        static void ReadArray() {
+            CK2File inFile = new CK2File(Path.Combine(Resources, "array.ck2"));
+            dynamic data = inFile.Read();
+
+            Console.WriteLine(string.Join(",", data.light_infantry_f));
+            Console.WriteLine(string.Join(",", data.archers_f));
+            Console.WriteLine(string.Join(",", data.att));
+            Console.WriteLine(string.Join(",", data.traits));
         }
 
         static void RewriteMain() {
