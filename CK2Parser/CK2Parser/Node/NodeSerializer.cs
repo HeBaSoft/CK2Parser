@@ -9,16 +9,20 @@ using System.Threading.Tasks;
 
 namespace CK2Parser.Node {
 
-    public class NodeSerializer {
+    internal class NodeSerializer {
 
-        private StringBuilder _buider = new StringBuilder();
-        private Node _node;
+        private StringBuilder   _buider;
+        private Node            _node;
 
         public NodeSerializer(Node node) {
+            _buider = new StringBuilder();
             _node = node;
         }
 
         public string Serialize() {
+            if(!_node.IsResolved) 
+                return _node.Raw; // No need to resolve now
+
             foreach(KeyValuePair<string, object> pair in _node) {
 
                 if(pair.Value is IList && !pair.Value.GetType().IsArray) {
@@ -33,14 +37,10 @@ namespace CK2Parser.Node {
             return _buider.ToString();
         }
 
-        public void SerializePair(KeyValuePair<string, object> pair) {
-            foreach(IParser parser in CK2File.Parsers) {
-
-                if(parser.Serialize(pair, _buider, _node.NestLevel)) {
+        private void SerializePair(KeyValuePair<string, object> pair) {
+            foreach(IParser parser in CK2File.Parsers)
+                if(parser.Serialize(pair, _buider, _node.NestLevel))
                     return;
-                }
-
-            }
 
             throw new Exception(string.Format("Unable to serialize data type {0}", pair.Value.GetType()));
         }

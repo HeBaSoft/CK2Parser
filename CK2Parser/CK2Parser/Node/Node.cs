@@ -11,20 +11,18 @@ namespace CK2Parser.Node {
 
     public class Node : DynamicObject, IEnumerable {
 
-        private string _raw;
-
         private Dictionary<string, object> _storage;
 
-        public ulong Count { private set; get; }
+        internal string Raw         { private set; get; }
 
-        public bool IsResolved { private set; get; }
-
-        public int NestLevel { private set; get; }
+        public bool     IsResolved  { private set; get; }
+        public int      NestLevel   { private set; get; }
+        public int      Elements    { private set; get; }
 
         public Node(string raw, int nestLevel) {
             IsResolved = false;
             NestLevel = nestLevel;
-            _raw = raw;
+            Raw = raw;
         }
 
         // Internals
@@ -43,7 +41,7 @@ namespace CK2Parser.Node {
                 _storage.Add(key, value);
             }
 
-            Count++;
+            Elements++;
         }
 
         private void Resolve() {
@@ -51,8 +49,8 @@ namespace CK2Parser.Node {
                 return;
 
             _storage = new Dictionary<string, object>();
-            new NodeDeserializer(_raw, this).Deserialize();
-            _raw = null;
+            new NodeDeserializer(this).Deserialize();
+            Raw = null;
             IsResolved = true;
         }
 
@@ -61,9 +59,8 @@ namespace CK2Parser.Node {
         public object Get(string key) {
             Resolve();
 
-            if(!_storage.ContainsKey(key)) {
+            if(!_storage.ContainsKey(key))
                 return null;
-            }
 
             return _storage[key];
         }
@@ -71,9 +68,8 @@ namespace CK2Parser.Node {
         public bool Set(string key, object value) {
             Resolve();
 
-            if(!_storage.ContainsKey(key)) {
+            if(!_storage.ContainsKey(key))
                 return false;
-            }
 
             _storage[key] = value;
             return true;

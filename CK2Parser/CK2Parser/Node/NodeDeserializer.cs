@@ -9,18 +9,16 @@ using System.Threading.Tasks;
 
 namespace CK2Parser.Node {
 
-    public class NodeDeserializer {
+    internal class NodeDeserializer {
 
-        private CachedLineReader _reader;
-        private Node _node;
+        private CachedLineReader    _reader;
+        private Node                _node;
 
-        public NodeDeserializer(CachedLineReader reader, Node node) {
-            _reader = reader;
-            _node = node;
-        }
+        public NodeDeserializer(Node node) {
+            if(node.IsResolved)
+                throw new Exception("Node is already resolved");
 
-        public NodeDeserializer(string source, Node node) {
-            _reader = new CachedLineReader(source);
+            _reader = new CachedLineReader(node.Raw);
             _node = node;
         }
 

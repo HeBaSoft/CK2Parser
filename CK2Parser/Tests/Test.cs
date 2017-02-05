@@ -1,6 +1,7 @@
 ﻿using CK2Parser.IO;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -14,14 +15,17 @@ namespace Tests {
         private static readonly string Resources = Path.Combine(Assembly.GetExecutingAssembly().Location, "../../../..", "Resources");
 
         static void Main(string[] args) {
+            Stopwatch watch = Stopwatch.StartNew();
+
             //ReadSimple();
             //ReadNested();
             //ReadWrapped();
             //ReadMultipleKeys();
             //ReadArray();
-            RewriteMain();
+            //RewriteMain();
 
-            Console.WriteLine("Done!");
+            watch.Stop();
+            Console.WriteLine("Task took {0} to finish.", TimeSpan.FromMilliseconds(watch.ElapsedMilliseconds).ToReadableString());
             Console.ReadKey();
         }
 
