@@ -30,57 +30,51 @@ namespace Tests {
         }
 
         static void ReadSimple() {
-            CK2File inFile = new CK2File(Path.Combine(Resources, "simple.ck2"));
-            dynamic data = inFile.Read();
+            CK2File Ck2f = CK2File.Read(Path.Combine(Resources, "simple.ck2"));
 
-            Console.WriteLine(data.version);
-            Console.WriteLine(data.game_speed);
-            Console.WriteLine(data.player_realm);
+            Console.WriteLine(Ck2f.Structure.version);
+            Console.WriteLine(Ck2f.Structure.game_speed);
+            Console.WriteLine(Ck2f.Structure.player_realm);
         }
 
         static void ReadNested() {
-            CK2File inFile = new CK2File(Path.Combine(Resources, "nested.ck2"));
-            dynamic data = inFile.Read();
+            CK2File Ck2f = CK2File.Read(Path.Combine(Resources, "nested.ck2"));
 
-            Console.WriteLine(data.disease_outbreak.start_date);
-            Console.WriteLine(data.disease_outbreak.disease_period.vassal_limit);
-            Console.WriteLine(data.disease_outbreak.past_provinces.claim.weak);
-            Console.WriteLine(data.disease_outbreak.past_provinces.claim.title.title);
+            Console.WriteLine(Ck2f.Structure.disease_outbreak.start_date);
+            Console.WriteLine(Ck2f.Structure.disease_outbreak.disease_period.vassal_limit);
+            Console.WriteLine(Ck2f.Structure.disease_outbreak.past_provinces.claim.weak);
+            Console.WriteLine(Ck2f.Structure.disease_outbreak.past_provinces.claim.title.title);
         }
 
         static void ReadWrapped() {
-            CK2File inFile = new CK2File(Path.Combine(Resources, "wrapped.ck2"));
-            dynamic data = inFile.Read();
+            CK2File Ck2f = CK2File.Read(Path.Combine(Resources, "wrapped.ck2"));
 
-            Console.WriteLine(data.player.wrapper.id);
-            Console.WriteLine(data.wrapper.game_speed);
-            Console.WriteLine(data.wrapper.mapmode);
+            Console.WriteLine(Ck2f.Structure.player.wrapper.id);
+            Console.WriteLine(Ck2f.Structure.wrapper.game_speed);
+            Console.WriteLine(Ck2f.Structure.wrapper.mapmode);
         }
 
         static void ReadMultipleKeys() {
-            CK2File inFile = new CK2File(Path.Combine(Resources, "multiplekeys.ck2"));
-            dynamic data = inFile.Read();
+            CK2File Ck2f = CK2File.Read(Path.Combine(Resources, "multiplekeys.ck2"));
 
-            Console.WriteLine(data.dyn_title[0].base_title);
-            Console.WriteLine(data.dyn_title[2].title);
-            Console.WriteLine(data.dyn_title[3].is_dynamic);
+            Console.WriteLine(Ck2f.Structure.dyn_title[0].base_title);
+            Console.WriteLine(Ck2f.Structure.dyn_title[2].title);
+            Console.WriteLine(Ck2f.Structure.dyn_title[3].is_dynamic);
         }
 
         static void ReadArray() {
-            CK2File inFile = new CK2File(Path.Combine(Resources, "array.ck2"));
-            dynamic data = inFile.Read();
+            CK2File Ck2f = CK2File.Read(Path.Combine(Resources, "array.ck2"));
 
-            Console.WriteLine(string.Join(",", data.light_infantry_f));
-            Console.WriteLine(string.Join(",", data.archers_f));
-            Console.WriteLine(string.Join(",", data.att));
-            Console.WriteLine(string.Join(",", data.traits));
+            Console.WriteLine(string.Join(",", Ck2f.Structure.light_infantry_f));
+            Console.WriteLine(string.Join(",", Ck2f.Structure.archers_f));
+            Console.WriteLine(string.Join(",", Ck2f.Structure.att));
+            Console.WriteLine(string.Join(",", Ck2f.Structure.traits));
         }
 
         static void RewriteMain() {
-            CK2File inFile = new CK2File(Path.Combine(Resources, "835_07_26.ck2"));
-
-            new CK2File(Path.Combine(Resources, "835_07_26_rewritten.ck2"))
-                .Write(inFile.Read());
+            CK2File
+                .Read(Path.Combine(Resources, "835_07_26.ck2"))
+                .SaveAs(Path.Combine(Resources, "835_07_26_rewritten.ck2"));
         }
 
     }

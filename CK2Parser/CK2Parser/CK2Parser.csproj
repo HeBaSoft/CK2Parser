@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="IO\CK2File.cs" />
     <Compile Include="IO\CachedLineReader.cs" />
+    <Compile Include="IO\CK2File.IO.cs" />
     <Compile Include="Node\NodeSerializer.cs" />
     <Compile Include="Node\NodeDeserializer.cs" />
     <Compile Include="Parse\Model\ArrayParser.cs" />
