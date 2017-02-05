@@ -9,16 +9,14 @@ using CK2Parser.Node;
 
 namespace CK2Parser.Parse.Model {
 
-    internal class NodeParser : IParser {
+    internal class NodeParser : ValueParser {
 
         private static readonly Regex _parser = new Regex(@"(\w+)=(?:\n.*|){");
 
-        public KeyValuePair<string, object> Deserialize(CachedLineReader reader, int nestLevel) {
+        public override KeyValuePair<string, object> Deserialize(CachedLineReader reader, int nestLevel) {
             StringBuilder builder = new StringBuilder(
                 reader.ReadLine()
             );
-
-            //nestLevel += builder.ToString().Count(ch => ch == '\t');
 
             if(!_parser.IsMatch(builder.ToString())) {
                 builder.Append(reader.ReadLine());
@@ -30,7 +28,7 @@ namespace CK2Parser.Parse.Model {
             string key = _parser.Match(builder.ToString()).Groups[1].ToString();
             
             builder.Clear();
-            Utils.ResolveNesting(reader, builder);
+            ResolveNesting(reader, builder);
 
             return new KeyValuePair<string, object>(
                 key,
@@ -38,18 +36,22 @@ namespace CK2Parser.Parse.Model {
             );
         }
 
-        public bool Serialize(KeyValuePair<string, object> source, StringBuilder builder, int nestLevel) {
-            if(source.Value is Node.Node) {
-                string padding = new string('\t', nestLevel);
+        public override bool Serialize(KeyValuePair<string, object> source, StringBuilder builder, int nestLevel) {
+            if(!(source.Value is Node.Node))
+                return false;
 
-                builder.Append(padding); builder.Append(source.Key); builder.AppendLine("=");
-                builder.Append(padding); builder.AppendLine("{");
-                builder.Append(new NodeSerializer(source.Value as Node.Node).Serialize());
-                builder.Append(padding); builder.AppendLine("}");
-                return true;
-            }
+            AppendTabs(builder, nestLevel);
+            builder.Append(source.Key);
+            builder.AppendLine("=");
 
-            return false;
+            AppendTabs(builder, nestLevel);
+            builder.AppendLine("{");
+
+            builder.Append(new NodeSerializer(source.Value as Node.Node).Serialize());
+
+            AppendTabs(builder, nestLevel);
+            builder.AppendLine("}");
+            return true;
         }
 
     }

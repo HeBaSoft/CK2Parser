@@ -23,6 +23,7 @@ namespace Tests {
             //ReadMultipleKeys();
             //ReadArray();
             //RewriteMain();
+            //EditSimple();
 
             watch.Stop();
             Console.WriteLine("Task took {0} to finish.", TimeSpan.FromMilliseconds(watch.ElapsedMilliseconds).ToReadableString());
@@ -75,6 +76,16 @@ namespace Tests {
             CK2File
                 .Read(Path.Combine(Resources, "835_07_26.ck2"))
                 .SaveAs(Path.Combine(Resources, "835_07_26_rewritten.ck2"));
+        }
+
+        static void EditSimple() {
+            CK2File Ck2f = CK2File.Read(Path.Combine(Resources, "simple.ck2"));
+
+            Console.WriteLine("Before: version={0}", Ck2f.Structure.version);
+            Ck2f.Structure.version = 42;
+            Console.WriteLine("After : version={0}", Ck2f.Structure.version);
+
+            Ck2f.SaveAs(Path.Combine(Resources, "simple_edit.ck2"));
         }
 
     }

@@ -9,12 +9,12 @@ using CK2Parser.Node;
 
 namespace CK2Parser.Parse.Model {
 
-    class ArrayParser : IParser {
+    class ArrayParser : ValueParser {
 
-        private static readonly Regex _parserOneline = new Regex(@"(\w+)=(?:{)(.+)}");
-        private static readonly Regex _parserUgly    = new Regex(@"(\w+)=(?:\s+{)(\s.+)}");
+        private static readonly Regex _parserOneline    = new Regex(@"(\w+)=(?:{)(.+)}");
+        private static readonly Regex _parserMultiline  = new Regex(@"(\w+)=(?:\s+{)(\s.+)}");
 
-        public KeyValuePair<string, object> Deserialize(CachedLineReader reader, int nestLevel) {
+        public override KeyValuePair<string, object> Deserialize(CachedLineReader reader, int nestLevel) {
             StringBuilder builder = new StringBuilder(
                 reader.ReadLine()
             );
@@ -28,10 +28,10 @@ namespace CK2Parser.Parse.Model {
                 builder.Append(reader.ReadLine());
                 builder.Append(reader.ReadLine());
 
-                if(!_parserUgly.IsMatch(builder.ToString()))
+                if(!_parserMultiline.IsMatch(builder.ToString()))
                     return default(KeyValuePair<string, object>);
 
-                match = _parserUgly.Match(builder.ToString());
+                match = _parserMultiline.Match(builder.ToString());
             }
 
             return new KeyValuePair<string, object>(
@@ -40,13 +40,11 @@ namespace CK2Parser.Parse.Model {
             );
         }
 
-        public bool Serialize(KeyValuePair<string, object> source, StringBuilder builder, int nestLevel) {
+        public override bool Serialize(KeyValuePair<string, object> source, StringBuilder builder, int nestLevel) {
             if(!source.Value.GetType().IsArray)
                 return false;
 
-            string padding = new string('\t', nestLevel);
-
-            builder.Append(padding);
+            AppendTabs(builder, nestLevel);
             builder.Append(source.Key);
             builder.Append("={");
             builder.Append(string.Join(" ", source.Value as object[]));

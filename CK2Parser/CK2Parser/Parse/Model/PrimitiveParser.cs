@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace CK2Parser.Parse.Model {
 
-    internal class PrimitiveParser : IParser {
+    internal class PrimitiveParser : ValueParser {
 
         private static readonly Regex _parser = new Regex(@"(\w+)=([^{\n]+)");
 
-        public KeyValuePair<string, object> Deserialize(CachedLineReader reader, int nestLevel) {
+        public override KeyValuePair<string, object> Deserialize(CachedLineReader reader, int nestLevel) {
             string raw = reader.ReadLine();
 
             if(!_parser.IsMatch(raw))
@@ -34,16 +34,15 @@ namespace CK2Parser.Parse.Model {
             );
         }
 
-        public bool Serialize(KeyValuePair<string, object> source, StringBuilder builder, int nestLevel) {
+        public override bool Serialize(KeyValuePair<string, object> source, StringBuilder builder, int nestLevel) {
             object value = source.Value;
 
             if(source.Key != WrapperParser.Key && (value.GetType().IsPrimitive || value is string)) {
 
-                if(value is bool) {
+                if(value is bool)
                     value = Convert.ToBoolean(value) ? "yes" : "no";
-                }
 
-                builder.Append(new string('\t', nestLevel));
+                AppendTabs(builder, nestLevel);
                 builder.Append(source.Key);
                 builder.Append("=");
                 builder.AppendLine(value.ToString());

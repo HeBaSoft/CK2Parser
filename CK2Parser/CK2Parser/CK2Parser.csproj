@@ -57,7 +57,7 @@
     <Compile Include="Parse\Model\PrimitiveParser.cs" />
     <Compile Include="Node\Node.cs" />
     <Compile Include="Parse\Model\WrapperParser.cs" />
-    <Compile Include="Parse\Utils.cs" />
+    <Compile Include="Parse\ValueParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
